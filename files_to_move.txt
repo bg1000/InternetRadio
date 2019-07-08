@@ -1,0 +1,11 @@
+config needs to go to /home/pi/.config/pianobar/config
+you need to add the correct Pandora username and password
+
+asound.conf needs to go to /etc/asound.conf
+there are 4 things in the file you need to customize
+- the name x 2
+- the description
+- the device id (MAC address) of the speaker
+
+
+

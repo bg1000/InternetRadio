@@ -1,0 +1,13 @@
+[Unit]
+Description=analog_scanner
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=20
+User=%i
+ExecStart=/usr/bin/python3 -u /home/pi/scripts/analog_scanner.py
+
+[Install]
+WantedBy=multi-user.target
