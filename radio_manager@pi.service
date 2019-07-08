@@ -1,5 +1,5 @@
 [Unit]
-Description=analog_scanner
+Description=radio_manager
 After=network.target
 
 [Service]
@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=20
 User=%i
-ExecStart=/usr/bin/python3 -u /home/pi/scripts/analog_scanner.py
+ExecStart=/usr/bin/python3 -u /home/pi/internet_radio/radio_manager.py
 
 [Install]
 WantedBy=multi-user.target
