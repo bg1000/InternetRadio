@@ -22,7 +22,7 @@ Setting up the Raspberry Pi
 Setting up Bluetooth
 ====================
 
-*Note: 0D:F9:82:90:0A:4D is used wherever a deviceid/MAC address is used in a command below.  You should substitute the address of your speaker which you will obtain in step # 2 below.*
+*Note: 0D:F9:82:90:0A:4D is used wherever a device_id/MAC address is used in a command below.  You should substitute the address of your speaker which you will obtain in step # 2 below.*
 
 1. `$ bluetoothctl`
 2. `# scan on` (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
