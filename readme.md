@@ -1,12 +1,15 @@
-1)Burn Raspbian image to sd card
-2)Create ssh file on card
-3)If using WiFi create ... file
-4)Boot Pi
-5)$sudo raspi-config to change password, set time zone, keyboard layout etc.
-6)$sudo apt-get update && sudo apt-get upgrade -y
-7)$sudo apt-get install screen -y
-8)$sudo apt-get install pianobar -y
-9) $sudo apt-get install bluez-utils -y --> not sure if this is correct
+Setting up the Raspberry Pi
+===========================
+
+- Burn Raspbian image to sd card
+- Create ssh file on card
+- If using WiFi create ... file
+- Boot Pi
+- $sudo raspi-config to change password, set time zone, keyboard layout etc.
+- $sudo apt-get update && sudo apt-get upgrade -y
+- $sudo apt-get install screen -y
+- $sudo apt-get install pianobar -y
+-  $sudo apt-get install bluez-utils -y --> not sure if this is correct
 10) $bluetoothctl
 11) # scan on (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
 12) # pair 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
