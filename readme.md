@@ -27,5 +27,12 @@
 24) to find screen $ screen -list
 25) to kill screen $ kill PID (use PID from -list)
 26) to switch to screen: $screen -r PID 
+27) to check the speaker status: $ bt-device -i 0D:F9:82:90:0A:4D.  This will show a few different things.  Near the bottom it will show "Connected: 0" or "C$
+28) radio_manager.py polls this connection status and starts and stops pianobar (in a detached screen) accordingly.
+29) to setup radio_manager edit /home/pi/internet_radio/radio_config.yaml.  Change the speaker address and polling time to meet your needs.
+30) to run interactively $ python3 /home/pi/internet_radio/radio_manager.py
+31) to set this up as a service the file /home/pi/internet_radio/radio_manager@pi.srevice will be used.  It should already be setup correctly buy you can mod$
+32) to setup: $ sudo bash /home/pi/internet_radio/autostart_systemd.sh. radio_manager will now start as a service on reboot.  It will log to /var/log/syslog
+33) to start immediatly: $sudo systemctl start radio_manager@pi
 
 
