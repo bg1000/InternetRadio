@@ -10,6 +10,7 @@ Setting up the Raspberry Pi
 - $sudo apt-get install screen -y
 - $sudo apt-get install pianobar -y
 -  $sudo apt-get install bluez-utils -y --> not sure if this is correct
+
 Setting up Bluetooth
 ====================
 
