@@ -1,9 +1,10 @@
 #import os
+import subprocess
 import time
 import yaml
 import os
-import bluetooth
 import utils
+import sys
 print ("Radio Manager Starting")
 
 #
@@ -30,17 +31,28 @@ if __name__ == "__main__":
     while True:
         if killer.kill_now:
           break
-        print ("Scanning for bluetooth devices")
-        nearby_devices = bluetooth.discover_devices(lookup_names=False, duration=30, flush_cache=True, lookup_class=False)
-        print("found %d devices" % len(nearby_devices))
+        print ("Checking to see if speaker is connected")
 
-        for addr in nearby_devices:
-            # print("  %s - %s" % (addr, name))
-            print("  %s" % str(addr))
-        # speaker address is CONFIG['speaker_address']
-        # check for Pandora app already running
-        # check for speaker connected
-        # start or stop radio and make number of Pandora instances correct
+        result = subprocess.check_output(['bt-device', '-i', CONFIG['speaker_address']]).decode(sys.stdout.encoding)         
+        out = result.split()
+        for st in out:
+            if  ("Connected" in st):
+                ind = out.index(st) + 1
+                if "0" in out[ind]:
+                    speaker_connected = False
+                    #print("Speaker not connected")
+                elif "1" in out[ind]:
+                    speaker_connected = True
+                    print("Speaker connected")
+                else:
+                    speaker_connected = none
+                    print("Error - Can't Determine if speaker is connected")
+        if (not speaker_connected and radios.count > 0):
+            radios.killAll()
+        elif (speaker_connected and radios.count == 0):
+            subprocess.call(['/home/pi/internet_radio/run_pianobar.sh'])
+        elif (speaker_connected and radios.count > 1):
+            radios.leaveOne()
         if killer.kill_now:
           break
 

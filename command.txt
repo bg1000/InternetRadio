@@ -1,0 +1,6 @@
+bt-device -i 0D:F9:82:90:0A:4D
+
+one of the lines says either
+Connected:0 or Connected:1
+
+
