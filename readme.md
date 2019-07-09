@@ -19,11 +19,11 @@ Setting up Bluetooth
 ====================
 
 1. `$ bluetoothctl`
-2. `\# scan on` (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
-3. `\# pair 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
-4. `\# trust 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
-5. `\# connect 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
-6. `\# quit`
+2. `# scan on` (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
+3. `# pair 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
+4. `# trust 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
+5. `# connect 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
+6. `# quit`
 7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on.
 8. With speaker connected test it with `$ aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav` or `$ bash speaker_test.sh` - You should hear voice from speaker say "Front. Center."
 9. To make your speaker the default audio device: `$ sudo cp asound.conf /etc/asound.conf` - there are 4 things in the file that need to be customized with an editor (e.g. - `$ sudo nano /etc/asound.conf`):
@@ -37,12 +37,12 @@ Setting up Pianobar
 ===================
 
 1. Setup pianobar config:
-  `- $ cd ~`
-  `- /home/pi$ mkdir .config`
-  `- /home/pi$ cd .config`
-  `- /home/pi/.config$ mkdir pianobar`
-  `-/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
-  `-$ nano /home/pi/.config/pianobar/config` - modify the username and pasword to the ones associated with your Pandora account.  You can also change any other options in the file.
+  - ` $ cd ~`
+  - ` /home/pi$ mkdir .config`
+  - ` /home/pi$ cd .config`
+  - ` /home/pi/.config$ mkdir pianobar`
+  - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
+  - `$ nano /home/pi/.config/pianobar/config` - modify the username and pasword to the ones associated with your Pandora account.  You can also change any other options in the file.
 2. you should be able to start the app with `$ pianobar`
 3. to run in screen: `$ screen -d -m pianobar`
 4. to find screen `$ screen -list`
