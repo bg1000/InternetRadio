@@ -25,8 +25,8 @@ Setting up Bluetooth
 5. \# connect 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
 6. \# quit
 7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on.
-8. With speaker connected test it with $aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav or speaker_test.sh - Speaker should play wave.
-9. To make your speaker the default audio device: move asound.conf to /etc/asound.conf - there are 4 things in the file that need to be customized: 
+8. With speaker connected test it with $aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav or speaker_test.sh - You should hear voice from speaker say "Front. Center."
+9. To make your speaker the default audio device: *$sudo cp asound.conf /etc/asound.conf* - there are 4 things in the file that need to be customized with an editor:
   - the name x 2
   - the description
   - the device id (MAC address) of the speaker
