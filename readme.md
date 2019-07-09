@@ -1,6 +1,6 @@
 Internet Radio
 ==============
-This application sets up a Pandora client on a headless Raspberry Pi with a bluetooth speaker.  Streaming is provided by the terminal Pandora client *pianobar*. Pianobar will ignore adds even on a free Pandora account. The app is designed such that music will automatically start when the speaker is turned on and streaming will stop when the speaker is turned off.  Your music choices are determined by the settings in the *pianobar* *config* file. Further interaction with the pi is not required.  However, you can optionally log in via ssh and change stations, +/- songs, etc.
+This application sets up a Pandora client on a headless Raspberry Pi with a bluetooth speaker.  Streaming is provided by the terminal Pandora client *pianobar*. Pianobar will ignore adds even on a free Pandora account. The app is designed such that music will automatically start when the speaker is turned on and streaming will stop when the speaker is turned off.  Your music choices are determined by the settings in the *pianobar* *config* file. Further interaction with the pi is not required.  However, you can optionally log in via ssh and change stations, +/- songs, add new stations etc.
 
 Setting up the Raspberry Pi
 ===========================
