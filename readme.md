@@ -45,10 +45,9 @@ Setting up radio_manager.py
 - to check the speaker status: $ bt-device -i 0D:F9:82:90:0A:4D.  This will show a few different things.  Near the bottom it will show "Connected: 0" or "Connected: 1"
 - radio_manager.py polls this connection status and starts and stops pianobar (in a detached screen) accordingly.
 - to setup radio_manager edit /home/pi/internet_radio/radio_config.yaml.  Change the speaker address and polling time to meet your needs.
-- radio_manager.py uses a number of python libraries that you will need to install using pip if they are not already installed:
+- radio_manager.py uses the following python libraries that you will need to install using pip if they are not already installed:
     - pip3 install psutil
-    - pip3 install
-    - pip3 install
+    - pip3 install PyYAML
 - to run interactively $ python3 /home/pi/internet_radio/radio_manager.py
 - to set this up as a service the file /home/pi/internet_radio/radio_manager@pi.srevice will be used.  It should already be setup correctly but you can modify it if you understand how it works and would like to make changes.
 - to setup: $ sudo bash /home/pi/internet_radio/autostart_systemd.sh. radio_manager will now start as a service on next reboot.  It will log to /var/log/syslog
