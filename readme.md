@@ -10,6 +10,9 @@ Setting up the Raspberry Pi
 - $sudo apt-get install screen -y
 - $sudo apt-get install pianobar -y
 - $sudo apt-get install bluez-utils -y --> not sure if this is correct
+- $git clone https://github.com/bg1000/InternetRadio.git
+
+*Note: The above step will create the directectory internet_radio under the directory you run the command from and copy the files from this repository into it.  The directions below assume you have run this command from /home/pi and therefore created the directory /home/pi/internet_radio.*
 
 Setting up Bluetooth
 ====================
