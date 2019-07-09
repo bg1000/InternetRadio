@@ -31,7 +31,7 @@ if __name__ == "__main__":
     while True:
         if killer.kill_now:
           break
-        print ("Checking to see if speaker is connected")
+#        print ("Checking to see if speaker is connected")
 
         result = subprocess.check_output(['bt-device', '-i', CONFIG['speaker_address']]).decode(sys.stdout.encoding)         
         out = result.split()
