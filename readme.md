@@ -50,7 +50,7 @@ Setting up Pianobar
   - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
   - `$ nano /home/pi/.config/pianobar/config` - modify the username and password to the ones associated with your Pandora account.  You can also change any other options in the file.
 2. Start the app from the command line with `$ pianobar`
-3. If you would like to change the default station . . . 
+3. If you would like to change the default station type "s".  You will see the list of configured stations on your account.
 4. To run in screen: `$ screen -d -m pianobar`
 5. To find screen `$ screen -list`
 6. To kill screen `$ kill PID` (use PID from -list)
