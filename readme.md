@@ -1,3 +1,7 @@
+Internet Radio
+==============
+This application sets up a Pandora client on a headless Raspberry Pi with a bluetooth speaker.  Streaming is provided by the terminal Pandora client *pianobar*. Pianobar will ignore adds even on a free Pandora account. The app is designed such that music will automatically start when the speaker is turned on and streaming will stop when the speaker is turned off.  Your music choices are determined by the settings in the *pianobar* *config* file. Further interaction with the pi is not required.  However, you can optionally log in via ssh and change stations, +/- songs, etc.
+
 Setting up the Raspberry Pi
 ===========================
 *Note: The first 3 steps listed below are standard for setting up a headless Raspberry Pi and are not specific to this project.  A more detailed explanation is available at https://www.raspberrypi.org/documentation/configuration/wireless/headless.md*
@@ -18,13 +22,15 @@ Setting up the Raspberry Pi
 Setting up Bluetooth
 ====================
 
+*Note: 0D:F9:82:90:0A:4D is used wherever a deviceid/MAC address is used in a command below.  You should substitute the address of your speaker which you will obtain in step # 2 below.*
+
 1. `$ bluetoothctl`
 2. `# scan on` (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
 3. `# pair 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
 4. `# trust 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
 5. `# connect 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
 6. `# quit`
-7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on.
+7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on. If your speaker does not play a connected tone you can check its status with `$ bt-device -i 0D:F9:82:90:0A:4D`. Look for either *Connected: 0* or *Connected: 1* near the bottom of the output.
 8. With speaker connected test it with `$ aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav` or `$ bash speaker_test.sh` - You should hear voice from speaker say "Front. Center."
 9. To make your speaker the default audio device: `$ sudo cp asound.conf /etc/asound.conf` - there are 4 things in the file that need to be customized with an editor (e.g. - `$ sudo nano /etc/asound.conf`):
   - the name x 2
@@ -42,17 +48,18 @@ Setting up Pianobar
   - ` /home/pi$ cd .config`
   - ` /home/pi/.config$ mkdir pianobar`
   - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
-  - `$ nano /home/pi/.config/pianobar/config` - modify the username and pasword to the ones associated with your Pandora account.  You can also change any other options in the file.
-2. you should be able to start the app with `$ pianobar`
-3. to run in screen: `$ screen -d -m pianobar`
-4. to find screen `$ screen -list`
-5. to kill screen `$ kill PID` (use PID from -list)
-6. to switch to screen: `$screen -r PID` (not required but useful to change stations, + or - a particular song, etc.)
+  - `$ nano /home/pi/.config/pianobar/config` - modify the username and password to the ones associated with your Pandora account.  You can also change any other options in the file.
+2. Start the app from the command line with `$ pianobar`
+3. If you would like to change the default station . . . 
+4. To run in screen: `$ screen -d -m pianobar`
+5. To find screen `$ screen -list`
+6. To kill screen `$ kill PID` (use PID from -list)
+7. To switch to screen: `$screen -r PID` (not required but useful to change stations, + or - a particular song, etc.)
 
 Setting up radio_manager.py
 ===========================
 
-1. to check the speaker status: `$ bt-device -i 0D:F9:82:90:0A:4D`.  This will show a few different things.  Near the bottom it will show "Connected: 0" or "Connected: 1"
+1. to check the speaker status: `$ bt-device -i 0D:F9:82:90:0A:4D`.  Look for *Connected: 0* or *Connected: 1* near the bottom of the output.
 2. radio_manager.py polls this connection status and starts and stops pianobar (in a detached screen) accordingly.
 3. to setup radio_manager `nano /home/pi/internet_radio/radio_config.yaml`.  Change the speaker address and polling time to meet your needs.
 4. radio_manager.py uses the following python libraries that you will need to install using pip if they are not already installed:
