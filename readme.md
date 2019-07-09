@@ -18,44 +18,50 @@ Setting up the Raspberry Pi
 Setting up Bluetooth
 ====================
 
-1. $bluetoothctl
-2. \# scan on (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
-3. \# pair 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
-4. \# trust 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
-5. \# connect 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
-6. \# quit
+1. `$ bluetoothctl`
+2. `\# scan on` (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
+3. `\# pair 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
+4. `\# trust 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
+5. `\# connect 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
+6. `\# quit`
 7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on.
-8. With speaker connected test it with $aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav or speaker_test.sh - You should hear voice from speaker say "Front. Center."
-9. To make your speaker the default audio device: *$sudo cp asound.conf /etc/asound.conf* - there are 4 things in the file that need to be customized with an editor:
+8. With speaker connected test it with `$ aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav` or `$ bash speaker_test.sh` - You should hear voice from speaker say "Front. Center."
+9. To make your speaker the default audio device: `$ sudo cp asound.conf /etc/asound.conf` - there are 4 things in the file that need to be customized with an editor (e.g. - `$ sudo nano /etc/asound.conf`):
   - the name x 2
   - the description
   - the device id (MAC address) of the speaker
-10. $sudo reboot
-11. After logging back in connect the speaker and test again without specifying the device i.e. -  $aplay /usr/share/sounds/alsa/Front_Center.wav -- sound should play as before.
+10. `$ sudo reboot`
+11. After logging back in connect the speaker and test again without specifying the device i.e. -  `$ aplay /usr/share/sounds/alsa/Front_Center.wav` -- sound should play as before.
 
 Setting up Pianobar
 ===================
 
-1. Move config  to /home/pi/.config/pianobar/config - add the correct Pandora username and password to the file and change whatever other options as desired.
-2. you should be able to start the app with $ pianobar
-3. to run in screen: $ screen -d -m pianobar
-4. to find screen $ screen -list
-5. to kill screen $ kill PID (use PID from -list)
-6. to switch to screen: $screen -r PID (not required but useful to change stations, + or - a particular song, etc.)
+1. Setup pianobar config:
+  `- $ cd ~`
+  `- /home/pi$ mkdir .config`
+  `- /home/pi$ cd .config`
+  `- /home/pi/.config$ mkdir pianobar`
+  `-/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
+  `-$ nano /home/pi/.config/pianobar/config` - modify the username and pasword to the ones associated with your Pandora account.  You can also change any other options in the file.
+2. you should be able to start the app with `$ pianobar`
+3. to run in screen: `$ screen -d -m pianobar`
+4. to find screen `$ screen -list`
+5. to kill screen `$ kill PID` (use PID from -list)
+6. to switch to screen: `$screen -r PID` (not required but useful to change stations, + or - a particular song, etc.)
 
 Setting up radio_manager.py
 ===========================
 
-1. to check the speaker status: $ bt-device -i 0D:F9:82:90:0A:4D.  This will show a few different things.  Near the bottom it will show "Connected: 0" or "Connected: 1"
+1. to check the speaker status: `$ bt-device -i 0D:F9:82:90:0A:4D`.  This will show a few different things.  Near the bottom it will show "Connected: 0" or "Connected: 1"
 2. radio_manager.py polls this connection status and starts and stops pianobar (in a detached screen) accordingly.
-3. to setup radio_manager edit /home/pi/internet_radio/radio_config.yaml.  Change the speaker address and polling time to meet your needs.
+3. to setup radio_manager `nano /home/pi/internet_radio/radio_config.yaml`.  Change the speaker address and polling time to meet your needs.
 4. radio_manager.py uses the following python libraries that you will need to install using pip if they are not already installed:
-    - pip3 install psutil
-    - pip3 install PyYAML
-5. to run interactively $ python3 /home/pi/internet_radio/radio_manager.py
-6. to set this up as a service the file /home/pi/internet_radio/radio_manager@pi.srevice will be used.  It should already be setup correctly but you can modify it if you understand how it works and would like to make changes.
-7. to setup: $ sudo bash /home/pi/internet_radio/autostart_systemd.sh. radio_manager will now start as a service on next reboot.  It will log to /var/log/syslog
-8. to start the service without rebooting: $sudo systemctl start radio_manager@pi
+    - `pip3 install psutil`
+    - `pip3 install PyYAML`
+5. to run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
+6. to set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  It should already be setup correctly but you can modify it if you understand how it works and would like to make changes.
+7. to setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. radio_manager will now start as a service on next reboot.  It will log to */var/log/syslog*
+8. to start the service without rebooting: `$sudo systemctl start radio_manager@pi`
 
 Final Test
 ==========
