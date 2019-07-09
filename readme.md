@@ -9,17 +9,17 @@ Setting up the Raspberry Pi
 - $sudo apt-get update && sudo apt-get upgrade -y
 - $sudo apt-get install screen -y
 - $sudo apt-get install pianobar -y
--  $sudo apt-get install bluez-utils -y --> not sure if this is correct
+- $sudo apt-get install bluez-utils -y --> not sure if this is correct
 
 Setting up Bluetooth
 ====================
 
 - $bluetoothctl
-- # scan on (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
-- # pair 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
-- # trust 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
-- # connect 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
-- # quit
+- \# scan on (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
+- \# pair 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
+- \# trust 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
+- \# connect 0D:F9:82:90:0A:4D (shows message that it is attempting and then second message with success or failure).
+- \# quit
 - Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on.
 - With speaker connected test it with aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav or speaker_test.sh - Speaker should play wave.
 - Move asound.conf to /etc/asound.conf - there are 4 things in the file that need to be customized: 
