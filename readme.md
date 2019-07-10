@@ -14,7 +14,7 @@ Setting up the Raspberry Pi
 6. `$sudo apt-get update && sudo apt-get upgrade -y`
 7. `$sudo apt-get install screen -y`
 8. `$sudo apt-get install pianobar -y`
-9. `$sudo apt-get install bluez-utils -y` --> not sure if this is correct
+9. `$sudo apt-get install bluez-tools -y`
 10. `$git clone https://github.com/bg1000/InternetRadio.git`
 
 *Note: The above step will create the directectory internet_radio under the directory you run the command from and copy the files from this repository into it.  The directions below assume you have run this command from /home/pi and therefore created the directory /home/pi/internet_radio.*
