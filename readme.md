@@ -50,7 +50,7 @@ Setting up Pianobar
   - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
   - `$ nano /home/pi/.config/pianobar/config` - modify the username and password to the ones associated with your Pandora account.  You can also change any other options in the file.
 2. Start the app from the command line with `$ pianobar`
-3. If you would like to change the default station type "s".  You will see a numbered list of configured stations setup on your account with a prompt to enter a station number. Enter the desired station number.  Pianobar will change the station and reply with a message similar to this: *Station "Queen Radio" (303915622719377191)*. Edit the config file as shown above. Edit the *autostart_station* line and add the station id number i.e. - `autostart_station = 303915622719377191`. The next time pinobar starts it will automatically start this station.
+3. If you would like to change the default station type "s".  You will see a numbered list of configured stations setup on your account with a prompt to enter a station number. Enter the desired station number.  Pianobar will change the station and reply with a message similar to this: *Station "Queen Radio" (303915622719377191)*. Edit the config file as shown in step 1 above. Edit the *autostart_station* line and change the station id number i.e. - `autostart_station = 303915622719377191`. The next time pianobar starts it will automatically start this station.
 4. To run in screen: `$ screen -d -m pianobar`
 5. To find screen `$ screen -list`
 6. To kill screen `$ kill PID` (use PID from -list)
@@ -59,16 +59,16 @@ Setting up Pianobar
 Setting up radio_manager.py
 ===========================
 
-1. to check the speaker status: `$ bt-device -i 0D:F9:82:90:0A:4D`.  Look for *Connected: 0* or *Connected: 1* near the bottom of the output.
+1. To check the speaker status: `$ bt-device -i 0D:F9:82:90:0A:4D`.  Look for *Connected: 0* or *Connected: 1* near the bottom of the output.
 2. radio_manager.py polls this connection status and starts and stops pianobar (in a detached screen) accordingly.
-3. to setup radio_manager `nano /home/pi/internet_radio/radio_config.yaml`.  Change the speaker address and polling time to meet your needs.
+3. To setup radio_manager `nano /home/pi/internet_radio/radio_config.yaml`.  Change the speaker address and polling time to meet your needs.
 4. radio_manager.py uses the following python libraries that you will need to install using pip if they are not already installed:
     - `pip3 install psutil`
     - `pip3 install PyYAML`
-5. to run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
-6. to set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  It should already be setup correctly but you can modify it if you understand how it works and would like to make changes.
-7. to setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. radio_manager will now start as a service on next reboot.  It will log to */var/log/syslog*
-8. to start the service without rebooting: `$sudo systemctl start radio_manager@pi`
+5. To run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
+6. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  It should already be setup correctly but you can modify it if you understand how it works and would like to make changes.
+7. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. radio_manager will now start as a service on next reboot.  It will log to */var/log/syslog*
+8. To start the service without rebooting: `$sudo systemctl start radio_manager@pi`
 
 Final Test
 ==========
