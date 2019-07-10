@@ -30,7 +30,7 @@ Setting up Bluetooth
 4. `# trust 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
 5. `# connect 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
 6. `# quit`
-7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on. If your speaker does not play a connected tone you can check its status with `$ bt-device -i 0D:F9:82:90:0A:4D`. Look for either *Connected: 0* or *Connected: 1* near the bottom of the output.
+7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on. If your speaker does not play a connected tone you can check its status with `$ bt-device -i 0D:F9:82:90:0A:4D`. Look for either *Connected: 0* or *Connected: 1* near the bottom of the output. If your speaker does not automatically connect when turned on you may have to script this.  You can an idea of how to do this from *autoonnect.sh*.
 8. With the speaker connected test it with `$ aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav` or `$ bash speaker_test.sh` - You should hear voice from speaker say "Front. Center."
 9. To make your speaker the default audio device: `$ sudo cp asound.conf /etc/asound.conf` - there are 4 things in the file that need to be customized with an editor (e.g. - `$ sudo nano /etc/asound.conf`):
   - the name x 2
