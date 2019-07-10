@@ -66,13 +66,13 @@ Setting up radio_manager.py
     - `pip3 install psutil`
     - `pip3 install PyYAML`
 5. To run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
-6. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  It should already be setup correctly but you can modify it if you understand how it works and would like to make changes.
-7. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. radio_manager will now start as a service on next reboot.  It will log to */var/log/syslog*
+6. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  The file already contains a know working setup for running radio_manager.py as a service and no changes should be required.
+7. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. The radio_manager application will now start as a service on the next reboot.  It will log to */var/log/syslog*
 8. To start the service without rebooting: `$sudo systemctl start radio_manager@pi`
 
 Final Test
 ==========
 
-Turn on the speaker.  It should automatically connect. Once the speaker is connected pianobar should start automatically and you should hear your favorite Pandora station. When you are done, simply turn off the speaker.  radio_manager will automatically stop pianobar.
+Turn on the speaker.  It should automatically connect. Once the speaker is connected pianobar should start automatically and you should hear your favorite Pandora station. When you are done, simply turn off the speaker.  The radio_manager application will automatically stop pianobar.
 
 
