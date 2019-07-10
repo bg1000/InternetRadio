@@ -15,7 +15,7 @@ print ("Radio Manager Starting")
 killer = utils.GracefulKiller()
 # Setup Management of Pianobar
 radios = utils.findProcByName("Pianobar")
-
+radio_start_script = str(os.path.join(os.path.abspath(os.path.dirname(__file__)))) + "/run_pianobar.sh"
 
 # open the config file
 with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'radio_config.yaml'), 'r') as ymlfile:
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         if (not speaker_connected and radios.count > 0):
             radios.killAll()
         elif (speaker_connected and radios.count == 0):
-            subprocess.call(['/home/pi/internet_radio/run_pianobar.sh'])
+            subprocess.call([radio_start_script])
         elif (speaker_connected and radios.count > 1):
             radios.leaveOne()
         if killer.kill_now:
