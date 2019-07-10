@@ -33,9 +33,9 @@ Setting up Bluetooth
 7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on. If your speaker does not play a connected tone you can check its status with `$ bt-device -i 0D:F9:82:90:0A:4D`. Look for either *Connected: 0* or *Connected: 1* near the bottom of the output. If your speaker does not automatically connect when turned on you may have to script this.  You can an idea of how to do this from *home/pi/internet_radio/autoconnect.sh*.
 8. With the speaker connected test it with `$ aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav` or `$ bash speaker_test.sh` - You should hear voice from speaker say "Front. Center."
 9. *Note: further details on this step can be found at https://alsa.opensrc.org/Asoundrc*. To make your speaker the default audio device: `$ sudo cp asound.conf /etc/asound.conf` - there are 4 things in the file that need to be customized with an editor (e.g. - `$ sudo nano /etc/asound.conf`):
-    - the name x 2
-    - the description
-    - the device id (MAC address) of the speaker
+   - the name x 2
+   - the description
+   - the device id (MAC address) of the speaker
 10. `$ sudo reboot`
 11. After logging back in connect the speaker and test again without specifying the device i.e. -  `$ aplay /usr/share/sounds/alsa/Front_Center.wav` -- sound should play as before.
 
@@ -43,12 +43,12 @@ Setting up Pianobar
 ===================
 *Note: Additional information on pianobar is availagel here - https://wiki.archlinux.org/index.php/Pianobar*
 1. Setup pianobar config:
-    - ` $ cd ~`
-    - ` /home/pi$ mkdir .config`
-    - ` /home/pi$ cd .config`
-    - ` /home/pi/.config$ mkdir pianobar`
-    - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
-    - `$ nano /home/pi/.config/pianobar/config` - modify the username and password to the ones associated with your Pandora account.  You can also change any other options in the file.
+   - ` $ cd ~`
+   - ` /home/pi$ mkdir .config`
+   - ` /home/pi$ cd .config`
+   - ` /home/pi/.config$ mkdir pianobar`
+   - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
+   - `$ nano /home/pi/.config/pianobar/config` - modify the username and password to the ones associated with your Pandora account.  You can also change any other options in the file.
 2. Start the app from the command line with `$ pianobar`
 3. If you would like to change the default station type "s".  You will see a numbered list of configured stations setup on your account with a prompt to enter a station number. Enter the desired station number.  Pianobar will change the station and reply with a message similar to this: *Station "Queen Radio" (303915622719377191)*. Edit the config file as shown in step 1 above. Edit the *autostart_station* line and change the station id number i.e. - `autostart_station = 303915622719377191`. The next time pianobar starts it will automatically start this station.
 4. To run in screen: `$ screen -d -m pianobar`
