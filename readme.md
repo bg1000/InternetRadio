@@ -41,7 +41,7 @@ Setting up Bluetooth
 
 Setting up Pianobar
 ===================
-*Note: Additional information on pianobar is availagel here - https://wiki.archlinux.org/index.php/Pianobar*
+*Note: Additional information on pianobar is available here - https://wiki.archlinux.org/index.php/Pianobar*
 1. Setup pianobar config:
    - ` $ cd ~`
    - ` /home/pi$ mkdir .config`
