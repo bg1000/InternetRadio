@@ -66,7 +66,7 @@ Setting up radio_manager.py
     - `pip3 install psutil`
     - `pip3 install PyYAML`
 5. To run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
-6. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  The file already contains a know working setup for running radio_manager.py as a service and no changes should be required.
+6. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  The file already contains a known working setup for running radio_manager.py as a service and no changes should be required.
 7. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. The radio_manager application will now start as a service on the next reboot.  It will log to */var/log/syslog*
 8. To start the service without rebooting: `$sudo systemctl start radio_manager@pi`
 
