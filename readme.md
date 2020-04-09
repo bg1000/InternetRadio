@@ -1,6 +1,6 @@
 Internet Radio
 ==============
-This application sets up a Pandora client on a headless Raspberry Pi with a bluetooth speaker.  Streaming is provided by the terminal Pandora client *pianobar*. Pianobar will ignore adds even on a free Pandora account. The app is designed such that music will automatically start when the speaker is turned on and streaming will stop when the speaker is turned off.  Your music choices are determined by the settings in the *pianobar* *config* file. Further interaction with the pi is not required.  However, you can optionally log in via ssh and change stations, +/- songs, add new stations etc.
+This application sets up a Pandora client on a headless Raspberry Pi with a bluetooth speaker.  Streaming is provided by the terminal Pandora client *pianobar*. *Pianobar* will ignore ads even on a free Pandora account. The app is designed such that music will automatically start when the speaker is turned on and streaming will stop when the speaker is turned off.  Your music choices are determined by the settings in the *pianobar* *config* file. Further interaction with the pi is not required.  However, you can optionally log in via ssh and change stations, +/- songs, add new stations etc.
 
 Setting up the Raspberry Pi
 ===========================
@@ -30,25 +30,25 @@ Setting up Bluetooth
 4. `# trust 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
 5. `# connect 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
 6. `# quit`
-7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on. If your speaker does not play a connected tone you can check its status with `$ bt-device -i 0D:F9:82:90:0A:4D`. Look for either *Connected: 0* or *Connected: 1* near the bottom of the output. If your speaker does not automatically connect when turned on you may have to script this.  You can an idea of how to do this from *autoconnect.sh*.
-8. With the speaker connected test it with `$ aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav` or `$ bash speaker_test.sh` - You should hear voice from speaker say "Front. Center."
-9. To make your speaker the default audio device: `$ sudo cp asound.conf /etc/asound.conf` - there are 4 things in the file that need to be customized with an editor (e.g. - `$ sudo nano /etc/asound.conf`):
-  - the name x 2
-  - the description
-  - the device id (MAC address) of the speaker
+7. Speaker may play helpful tone when it connects. Test to make sure speaker automatically connects by turning off and back on. If your speaker does not play a connected tone you can check its status with `$ bt-device -i 0D:F9:82:90:0A:4D`. Look for either *Connected: 0* or *Connected: 1* near the bottom of the output. If your speaker does not automatically connect when turned on you may have to script this.  You can get an idea of how to do this from *home/pi/internet_radio/autoconnect.sh*.
+8. With the speaker connected test it with `$ aplay -D bluealsa:DEV=0D:F9:82:90:0A:4D,PROFILE=a2dp /usr/share/sounds/alsa/Front_Center.wav` or `$ bash speaker_test.sh` - You should hear a voice from speaker say "Front. Center."
+9. *Note: further details on this step can be found at https://alsa.opensrc.org/Asoundrc*. To make your speaker the default audio device: `$ sudo cp asound.conf /etc/asound.conf` - there are 4 things in the file that need to be customized with an editor (e.g. - `$ sudo nano /etc/asound.conf`):
+   - the name x 2
+   - the description
+   - the device id (MAC address) of the speaker
 10. `$ sudo reboot`
 11. After logging back in connect the speaker and test again without specifying the device i.e. -  `$ aplay /usr/share/sounds/alsa/Front_Center.wav` -- sound should play as before.
 
 Setting up Pianobar
 ===================
-
+*Note: Additional information on pianobar is available here - https://wiki.archlinux.org/index.php/Pianobar*
 1. Setup pianobar config:
-  - ` $ cd ~`
-  - ` /home/pi$ mkdir .config`
-  - ` /home/pi$ cd .config`
-  - ` /home/pi/.config$ mkdir pianobar`
-  - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
-  - `$ nano /home/pi/.config/pianobar/config` - modify the username and password to the ones associated with your Pandora account.  You can also change any other options in the file.
+   - ` $ cd ~`
+   - ` /home/pi$ mkdir .config`
+   - ` /home/pi$ cd .config`
+   - ` /home/pi/.config$ mkdir pianobar`
+   - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
+   - `$ nano /home/pi/.config/pianobar/config` - modify the username and password to the ones associated with your Pandora account.  You can also change any other options in the file.
 2. Start the app from the command line with `$ pianobar`
 3. If you would like to change the default station type "s".  You will see a numbered list of configured stations setup on your account with a prompt to enter a station number. Enter the desired station number.  Pianobar will change the station and reply with a message similar to this: *Station "Queen Radio" (303915622719377191)*. Edit the config file as shown in step 1 above. Edit the *autostart_station* line and change the station id number i.e. - `autostart_station = 303915622719377191`. The next time pianobar starts it will automatically start this station.
 4. To run in screen: `$ screen -d -m pianobar`
@@ -66,13 +66,13 @@ Setting up radio_manager.py
     - `pip3 install psutil`
     - `pip3 install PyYAML`
 5. To run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
-6. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  It should already be setup correctly but you can modify it if you understand how it works and would like to make changes.
-7. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. radio_manager will now start as a service on next reboot.  It will log to */var/log/syslog*
+6. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  The file already contains a known working setup for running radio_manager.py as a service and no changes should be required.
+7. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. The radio_manager application will now start as a service on the next reboot.  It will log to */var/log/syslog*
 8. To start the service without rebooting: `$sudo systemctl start radio_manager@pi`
 
 Final Test
 ==========
 
-Turn on the speaker.  It should automatically connect. Once the speaker is connected pianobar should start automatically and you should hear your favorite Pandora station. When you are done, simply turn off the speaker.  radio_manager will automatically stop pianobar.
+Turn on the speaker.  It should automatically connect. Once the speaker is connected pianobar should start automatically and you should hear your favorite Pandora station. When you are done, simply turn off the speaker.  The radio_manager application will automatically stop pianobar.
 
 
