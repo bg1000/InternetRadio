@@ -16,10 +16,10 @@ RUN git clone https://github.com/bg1000/InternetRadio.git
 RUN mkdir .config
 #RUN cd .config
 RUN mkdir ./.config/pianobar
-RUN cp ./InternetRadio/config ./.config/pianobar/config
+RUN cp * ./.config/pianobar/config
 
 # Intall required python modules 
 RUN pip3 install --no-cache-dir -r ./InternetRadio/requirements.txt
 
 # Run GarageQTPi
-#CMD ["/bin/sh", "./InternetRadio/startup.sh"]
+CMD ["/bin/sh", "./InternetRadio/startup.sh"]

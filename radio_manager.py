@@ -5,6 +5,7 @@ import yaml
 import os
 import utils
 import sys
+from subprocess import CalledProcessError
 print ("Radio Manager Starting")
 
 #
