@@ -22,4 +22,4 @@ RUN cp ./InternetRadio/config ./.config/pianobar/config
 RUN pip3 install --no-cache-dir -r ./InternetRadio/requirements.txt
 
 # Run GarageQTPi
-CMD ["/bin/sh", "./InternetRadio/startup.sh"]
+#CMD ["/bin/sh", "./InternetRadio/startup.sh"]

@@ -33,26 +33,29 @@ if __name__ == "__main__":
           break
 #        print ("Checking to see if speaker is connected")
 
-        result = subprocess.check_output(['bt-device', '-i', CONFIG['speaker_address']]).decode(sys.stdout.encoding)         
-        out = result.split()
-        for st in out:
-            if  ("Connected" in st):
-                ind = out.index(st) + 1
-                if "0" in out[ind]:
-                    speaker_connected = False
-                    #print("Speaker not connected")
-                elif "1" in out[ind]:
-                    speaker_connected = True
-                    print("Speaker connected")
-                else:
-                    speaker_connected = none
-                    print("Error - Can't Determine if speaker is connected")
-        if (not speaker_connected and radios.count > 0):
-            radios.killAll()
-        elif (speaker_connected and radios.count == 0):
-            subprocess.call([radio_start_script])
-        elif (speaker_connected and radios.count > 1):
-            radios.leaveOne()
+        try:
+            result = subprocess.check_output(['bt-device', '-i', CONFIG['speaker_address']]).decode(sys.stdout.encoding)         
+            out = result.split()
+            for st in out:
+                if  ("Connected" in st):
+                    ind = out.index(st) + 1
+                    if "0" in out[ind]:
+                        speaker_connected = False
+                        #print("Speaker not connected")
+                    elif "1" in out[ind]:
+                        speaker_connected = True
+                        print("Speaker connected")
+                    else:
+                        speaker_connected = None
+                        print("Error - Can't Determine if speaker is connected")
+            if (not speaker_connected and radios.count > 0):
+                radios.killAll()
+            elif (speaker_connected and radios.count == 0):
+                subprocess.call([radio_start_script])
+            elif (speaker_connected and radios.count > 1):
+                radios.leaveOne()
+        except CalledProcessError:
+            print("Unable to call bt_device")
         if killer.kill_now:
           break
 
