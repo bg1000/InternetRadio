@@ -35,6 +35,7 @@ if __name__ == "__main__":
 #        print ("Checking to see if speaker is connected")
 
         try:
+            print ("IN A TRY BLOCK!!!!!!!!!!!")
             result = subprocess.check_output(['bt-device', '-i', CONFIG['speaker_address']]).decode(sys.stdout.encoding)         
             out = result.split()
             for st in out:
