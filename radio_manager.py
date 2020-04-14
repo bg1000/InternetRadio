@@ -3,9 +3,14 @@ import subprocess
 import time
 import yaml
 import os
-import utils
+import lib.utils
 import sys
 from subprocess import CalledProcessError
+if lib.utils.add_package_path("bluetool"):
+    from bluetool import Bluetooth
+else:
+    print("Can't find an installed version of bluetool. Exiting")
+    sys.exit(1)
 print ("Radio Manager Starting")
 
 #
@@ -13,14 +18,17 @@ print ("Radio Manager Starting")
 #
 
 # allow this looping app to receive termination signals
-killer = utils.GracefulKiller()
+killer = lib.utils.GracefulKiller()
 # Setup Management of Pianobar
-radios = utils.findProcByName("Pianobar")
+radios = lib.utils.findProcByName("Pianobar")
 radio_start_script = str(os.path.join(os.path.abspath(os.path.dirname(__file__)))) + "/run_pianobar.sh"
 
 # open the config file
 with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'radio_config.yaml'), 'r') as ymlfile:
     CONFIG = yaml.safe_load(ymlfile)
+
+bluetooth = Bluetooth()
+
 #
 # End Setup
 #
@@ -31,33 +39,22 @@ with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'radio_config
 if __name__ == "__main__":
     while True:
         if killer.kill_now:
-          break
-#        print ("Checking to see if speaker is connected")
+            break
+        print ("Checking to see if speaker is connected")
 
-        try:
-            print ("IN A TRY BLOCK!!!!!!!!!!!")
-            result = subprocess.check_output(['bt-device', '-i', CONFIG['speaker_address']]).decode(sys.stdout.encoding)         
-            out = result.split()
-            for st in out:
-                if  ("Connected" in st):
-                    ind = out.index(st) + 1
-                    if "0" in out[ind]:
-                        speaker_connected = False
-                        #print("Speaker not connected")
-                    elif "1" in out[ind]:
-                        speaker_connected = True
-                        print("Speaker connected")
-                    else:
-                        speaker_connected = None
-                        print("Error - Can't Determine if speaker is connected")
-            if (not speaker_connected and radios.count > 0):
-                radios.killAll()
-            elif (speaker_connected and radios.count == 0):
-                subprocess.call([radio_start_script])
-            elif (speaker_connected and radios.count > 1):
-                radios.leaveOne()
-        except CalledProcessError:
-            print("Unable to call bt_device")
+        devices = bluetooth.get_connected_devices()
+        speaker_connected = False
+        if devices:
+            for device in devices:
+                if device["Address"] == CONFIG['speaker_address']:
+                    speaker_connected = True
+                    break
+        if (not speaker_connected and radios.count > 0):
+            radios.killAll()
+        elif (speaker_connected and radios.count == 0):
+            subprocess.call([radio_start_script])
+        elif (speaker_connected and radios.count > 1):
+            radios.leaveOne()
         if killer.kill_now:
           break
 

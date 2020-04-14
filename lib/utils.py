@@ -1,7 +1,10 @@
+import datetime
+import os
 import psutil
 import signal
-import os
-import datetime
+import site
+import sys
+
 
 class findProcByName:
      pidList = []
@@ -57,4 +60,28 @@ class GracefulKiller:
 
   def exit_gracefully(self,signum, frame):
     self.kill_now = True
-
+#
+# This is a workaround for python 2 packages that would otherwise
+# run under python 3 except imports don't work 
+# properly because they are releative rather than absolute.
+# This function searches for the installation directory of the package.
+# If it finds it it, it adds it to sys.path allowing the imports to work.
+#
+def add_package_path(package_name):
+    path_list = []
+    path_list = site.getsitepackages()
+    print(path_list)
+    user_path_list = site.getusersitepackages()
+    print (user_path_list)
+    path_list.append(user_path_list)
+    print(path_list)
+    for path in path_list:
+        try:
+            dir_list = os.listdir(path)
+            if package_name in dir_list:
+                sys.path.insert(0,path + "/" + package_name)
+                return True
+        except FileNotFoundError:
+            # python sometimes reports a directory that doesn't exist so?
+            pass
+    return False
