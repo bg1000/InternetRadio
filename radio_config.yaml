@@ -1,2 +1,3 @@
-  sleep_seconds: 5
-  speaker_address: 0D:F9:82:90:0A:4D
+log_level: DEBUG
+speaker_address: 0D:F9:82:90:0A:4D
+radio_start_script: /home/pi/internet_radio/run_painobar.sh
