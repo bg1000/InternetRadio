@@ -16,6 +16,8 @@ Setting up the Raspberry Pi
 8. `$sudo apt-get install pianobar -y`
 9. `$sudo apt-get install bluez-tools -y`
 10. `$git clone https://github.com/bg1000/InternetRadio.git`
+11. `$cd InternetRadio`
+12. `pip3 install -r requirements.txt`
 
 *Note: The above step will create the directectory internet_radio under the directory you run the command from and copy the files from this repository into it.  The directions below assume you have run this command from /home/pi and therefore created the directory /home/pi/internet_radio.*
 
@@ -59,16 +61,12 @@ Setting up Pianobar
 Setting up radio_manager.py
 ===========================
 
-1. To check the speaker status: `$ bt-device -i 0D:F9:82:90:0A:4D`.  Look for *Connected: 0* or *Connected: 1* near the bottom of the output.
-2. radio_manager.py polls this connection status and starts and stops pianobar (in a detached screen) accordingly.
+1. To check the speaker status: `$ bt-device -i 0D:F9:82:90:0A:4D`.  Look for *Connected: 0* or *Connected: 1* near the bottom of the output. radio_manager subscribes to a dbus signal that notifies it when this property changes.  When it changes to Connected: 1 it starts the radio.  When it changes to Connect: 0 it stops the radio. If music doesn't start when you turn on your speaker, verify it is connecting with the command shown above.
 3. To setup radio_manager `nano /home/pi/internet_radio/radio_config.yaml`.  Change the speaker address and polling time to meet your needs.
-4. radio_manager.py uses the following python libraries that you will need to install using pip if they are not already installed:
-    - `pip3 install psutil`
-    - `pip3 install PyYAML`
-5. To run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
-6. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  The file already contains a known working setup for running radio_manager.py as a service and no changes should be required.
-7. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. The radio_manager application will now start as a service on the next reboot.  It will log to */var/log/syslog*
-8. To start the service without rebooting: `$sudo systemctl start radio_manager@pi`
+4. To run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
+5. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  The file already contains a known working setup for running radio_manager.py as a service and no changes should be required.
+6. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. The radio_manager application will now start as a service on the next reboot.  It will log to */var/log/syslog*
+7. To start the service without rebooting: `$sudo systemctl start radio_manager@pi`
 
 Final Test
 ==========
