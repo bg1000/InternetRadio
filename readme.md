@@ -48,7 +48,7 @@ Setting up Pianobar
    - ` /home/pi$ mkdir .config`
    - ` /home/pi$ cd .config`
    - ` /home/pi/.config$ mkdir pianobar`
-   - `/home/pi/.config$ cp /home/pi/internet_radio/config /home/pi/.config/pianobar/config`
+   - `/home/pi/.config$ cp /home/pi/InternetRadio/config /home/pi/.config/pianobar/config`
    - `$ nano /home/pi/.config/pianobar/config` - modify the username and password to the ones associated with your Pandora account.  You can also change any other options in the file.
 2. Start the app from the command line with `$ pianobar`
 3. If you would like to change the default station type "s".  You will see a numbered list of configured stations setup on your account with a prompt to enter a station number. Enter the desired station number.  Pianobar will change the station and reply with a message similar to this: *Station "Queen Radio" (303915622719377191)*. Edit the config file as shown in step 1 above. Edit the *autostart_station* line and change the station id number i.e. - `autostart_station = 303915622719377191`. The next time pianobar starts it will automatically start this station.
