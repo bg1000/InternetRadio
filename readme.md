@@ -6,18 +6,17 @@ Setting up the Raspberry Pi
 ===========================
 *Note: The first 3 steps listed below are standard for setting up a headless Raspberry Pi and are not specific to this project.  A more detailed explanation is available at https://www.raspberrypi.org/documentation/configuration/wireless/headless.md*
 
-1. Burn Raspbian image to sd card
+1. Burn Raspbian image to sd card. These instructions are for Raspbian lite. If you install another version you may already have some of these packages.
 2. Create ssh file and place it in the boot folder on the sd card.
 3. If using WiFi create a wpa_supplicant.conf file and place it on the boot folder on the sd card.
 4. Boot Pi and connect over ssh using putty or the terminal application of your choice.
 5. `$sudo raspi-config` to change password, set time zone, keyboard layout etc.
 6. `$sudo apt-get update && sudo apt-get upgrade -y`
-7. `$sudo apt-get install screen -y`
-8. `$sudo apt-get install pianobar -y`
-9. `$sudo apt-get install bluez-tools -y`
-10. `$git clone https://github.com/bg1000/InternetRadio.git`
-11. `$cd InternetRadio`
-12. `pip3 install -r requirements.txt`
+7. `$sudo apt-get install git screen pianobar bluez-tools-y`
+8. `$sudo apt-get install python3-pip -y
+9. `$git clone https://github.com/bg1000/InternetRadio.git`
+10. `$cd InternetRadio`
+11. `pip3 install -r requirements.txt`
 
 *Note: The above step will create the directectory internet_radio under the directory you run the command from and copy the files from this repository into it.  The directions below assume you have run this command from /home/pi and therefore created the directory /home/pi/internet_radio.*
 
