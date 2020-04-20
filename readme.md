@@ -13,7 +13,7 @@ Setting up the Raspberry Pi
 5. `$sudo raspi-config` to change password, set time zone, keyboard layout etc.
 6. `$sudo apt-get update && sudo apt-get upgrade -y`
 7. `$sudo apt-get install git screen pianobar bluez-tools-y`
-8. `$sudo apt-get install python3-pip -y
+8. `$sudo apt-get install python3-pip -y`
 9. `$git clone https://github.com/bg1000/InternetRadio.git`
 10. `$cd InternetRadio`
 11. `pip3 install -r requirements.txt`
