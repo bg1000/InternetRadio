@@ -72,4 +72,4 @@ Final Test
 
 Turn on the speaker.  It should automatically connect. Once the speaker is connected pianobar should start automatically and you should hear your favorite Pandora station. When you are done, simply turn off the speaker.  The radio_manager application will automatically stop pianobar.
 
-
+https://sigmdel.ca/michel/ha/rpi/bluetooth_n_buster_01_en.html
