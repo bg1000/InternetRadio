@@ -12,13 +12,14 @@ Setting up the Raspberry Pi
 4. Boot Pi and connect over ssh using putty or the terminal application of your choice.
 5. `$sudo raspi-config` to change password, set time zone, keyboard layout etc.
 6. `$sudo apt-get update && sudo apt-get upgrade -y`
-7. `$sudo apt-get install git screen pianobar bluez-tools-y`
-8. `$sudo apt-get install python3-pip -y`
-9. `$git clone https://github.com/bg1000/InternetRadio.git`
-10. `$cd InternetRadio`
-11. `pip3 install -r requirements.txt`
+7. `$sudo apt-get install git screen pianobar bluez-tools python3-pip -y`
+8. `$git clone https://github.com/bg1000/InternetRadio.git`
+9. `$cd InternetRadio`
+10. `$pip3 install -r requirements.txt`
+11. `$sudo adduser pi bluetooth`
+12. `$sudo reboot`
 
-*Note: The above step will create the directectory internet_radio under the directory you run the command from and copy the files from this repository into it.  The directions below assume you have run this command from /home/pi and therefore created the directory /home/pi/internet_radio.*
+*Note: The above step will create the directectory InternetRadio under the directory you run the command from and copy the files from this repository into it.  The directions below assume you have run this command from /home/pi and therefore created the directory /home/pi/internet_radio.*
 
 Setting up Bluetooth
 ====================
@@ -72,4 +73,9 @@ Final Test
 
 Turn on the speaker.  It should automatically connect. Once the speaker is connected pianobar should start automatically and you should hear your favorite Pandora station. When you are done, simply turn off the speaker.  The radio_manager application will automatically stop pianobar.
 
+TroubleShooting
+1) If you are having trouble getting bluetooth working on the pi you may find this blog post and the ones it links to helpful. In addition to general setup help, the author explores some of the differences in different versions of Raspbian, alsa and blue-alsa which may be helpful if you are not running current versions.
+
 https://sigmdel.ca/michel/ha/rpi/bluetooth_n_buster_01_en.html
+
+2)The current version of asound.conf in the repository works with Raspbian buster.  There is an older version in the history that worked with Raspbian stretch.
