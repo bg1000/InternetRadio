@@ -26,7 +26,7 @@ Setting up Bluetooth
 
 *Note: 0D:F9:82:90:0A:4D is used wherever a device_id/MAC address is used in a command below.  You should substitute the address of your speaker which you will obtain in step # 2 below.*
 
-1. `$ bluetoothctl`
+1. `$ sudo bluetoothctl`
 2. `# scan on` (to get the speaker Device id/Mac Address) - will look something like "[NEW] Device 0D:F9:82:90:0A:4D Oontz Angle"
 3. `# pair 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
 4. `# trust 0D:F9:82:90:0A:4D` (shows message that it is attempting and then second message with success or failure).
@@ -64,8 +64,8 @@ Setting up radio_manager.py
 1. To check the speaker status: `$ bt-device -i 0D:F9:82:90:0A:4D`.  Look for *Connected: 0* or *Connected: 1* near the bottom of the output. radio_manager subscribes to a dbus signal that notifies it when this property changes.  When it changes to Connected: 1 it starts the radio.  When it changes to Connect: 0 it stops the radio. If music doesn't start when you turn on your speaker, verify it is connecting with the command shown above.
 3. To setup radio_manager `nano /home/pi/internet_radio/radio_config.yaml`.  Change the speaker address and polling time to meet your needs.
 4. To run interactively `$ python3 /home/pi/internet_radio/radio_manager.py`
-5. To set this up as a service the file */home/pi/internet_radio/radio_manager@pi.srevice* will be used.  The file already contains a known working setup for running radio_manager.py as a service and no changes should be required.
-6. To setup: `$ sudo bash /home/pi/internet_radio/autostart_systemd.sh`. The radio_manager application will now start as a service on the next reboot.  It will log to */var/log/syslog*
+5. To set this up as a service the file */home/pi/InternetRadio/radio_manager@pi.srevice* will be used.  The file already contains a known working setup for running radio_manager.py as a service and no changes should be required.
+6. To setup: `$ sudo bash /home/pi/InternetRadio/autostart_systemd.sh`. The radio_manager application will now start as a service on the next reboot.  It will log to */var/log/syslog*
 7. To start the service without rebooting: `$sudo systemctl start radio_manager@pi`
 
 Final Test
