@@ -20,27 +20,33 @@ def on_state_change(sender, message, other):
     # other <-- list (empty in this app)
     if sender == 'org.bluez.Device1':
         # check how many instance of radio app are running
-        radios.refresh()
         if message['Connected']:
+            radios.refresh()
             logging.debug("Speaker connection detected.")
+            logging.debug("Radio count = " + str(radios.count))
             if radios.count == 0:
-                subprocess.call([radio_start_script])
+                logging.debug("Starting Radio")
+                subprocess.call(CONFIG["radio_start_script"])
             elif radios.count > 1:
-                radios.leaveOne
+                radios.leaveOne()
         else:
             logging.debug("Speaker disconnection detected.")
+            radios.refresh()
             if radios.count > 0:
-                radios.killAll
+                radios.killAll()
+                logging.debug("Stopping Radio.")
+            else:
+                logging.debug("No Radios found.")
 
 
 # Read the config file, set up logging
 with open(os.path.join(os.path.abspath(os.path.dirname(__file__)),
                        'radio_config.yaml'), 'r') as ymlfile:
     CONFIG = yaml.safe_load(ymlfile)
-    logging.basicConfig(level=CONFIG["log_level"])
-    logging.info("Radio Manager has started.")
+logging.basicConfig(level=CONFIG["log_level"])
+logging.info("Radio Manager has started.")
 # Setup Management of Pianobar
-radios = lib.utils.findProcByName("Pianobar")
+radios = lib.utils.findProcByName("pianobar")
 radio_start_script = CONFIG["radio_start_script"]
 
 
