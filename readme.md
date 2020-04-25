@@ -80,9 +80,9 @@ https://sigmdel.ca/michel/ha/rpi/bluetooth_n_buster_01_en.html
 
 This stack exchange post, while for the raspberry pi zero specifically may also be usefuil - https://raspberrypi.stackexchange.com/questions/90267/how-to-stream-sound-to-a-bluetooth-device-from-a-raspberry-pi-zero
 
-2)The current version of asound.conf in the repository works with Raspbian buster.  There is an older version in the history that worked with Raspbian stretch.
+2)The current version of asound.conf in the repository works with Raspbian buster.  There is an older version in the history that worked with Raspbian stretch.rns
 
-3) If aplay retunrs audio `open error: No such device` double check to make sure the speaker is paired, on, and connected. You can also try modifing the bluettoth service file as follows:
+3) If aplay returns `open error: No such device` double check to make sure the speaker is paired, on, and connected. You can also try modifing the bluettoth service file as follows:
 `sudo nano /etc/systemd/system/bluetooth.target.wants/bluetooth .service`
 `ExecStart=/usr/lib/bluetooth/bluetoothd --noplugin=sap --plugin=a2dp`
 `sudo systemctl daemon-reload`
