@@ -73,9 +73,20 @@ Final Test
 
 Turn on the speaker.  It should automatically connect. Once the speaker is connected pianobar should start automatically and you should hear your favorite Pandora station. When you are done, simply turn off the speaker.  The radio_manager application will automatically stop pianobar.
 
-TroubleShooting
+# TroubleShooting
 1) If you are having trouble getting bluetooth working on the pi you may find this blog post and the ones it links to helpful. In addition to general setup help, the author explores some of the differences in different versions of Raspbian, alsa and blue-alsa which may be helpful if you are not running current versions.
 
 https://sigmdel.ca/michel/ha/rpi/bluetooth_n_buster_01_en.html
 
+This stack exchange post, while for the raspberry pi zero specifically may also be usefuil - https://raspberrypi.stackexchange.com/questions/90267/how-to-stream-sound-to-a-bluetooth-device-from-a-raspberry-pi-zero
+
 2)The current version of asound.conf in the repository works with Raspbian buster.  There is an older version in the history that worked with Raspbian stretch.
+
+3) If aplay retunrs audio `open error: No such device` double check to make sure the speaker is paired, on, and connected. You can also try modifing the bluettoth service file as follows:
+`sudo nano /etc/systemd/system/bluetooth.target.wants/bluetooth .service`
+`ExecStart=/usr/lib/bluetooth/bluetoothd --noplugin=sap --plugin=a2dp`
+`sudo systemctl daemon-reload`
+`systemctl restart bluetooth`
+
+4)You can verify the bluetooth connectivity on D-Bus with `busctl tree org.bluez`
+5) If the speaker did not actually pair properly it may help to start over by typing `remove 0D:F9:82:90:0A:4D` in bluetoothctl.
