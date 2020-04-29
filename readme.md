@@ -15,7 +15,7 @@ Setting up the Raspberry Pi
 5. `$sudo raspi-config` to change password, set time zone, keyboard layout etc.
 6. `$sudo apt-get update && sudo apt-get upgrade -y`
 7. `$sudo apt-get install git screen pianobar bluez-tools bluealsa python3-pip python3-venv libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 -y`
-8. `$ bash <(curl -s http://mywebsite.com/myscript.txt)'
+8. `$ bash <(curl -s https://raw.githubusercontent.com/bg1000/InternetRadio/master/install.sh)`
 11. `$sudo adduser pi bluetooth`
 12. `$sudo reboot`
 
