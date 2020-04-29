@@ -4,7 +4,9 @@ This application sets up a Pandora client on a headless Raspberry Pi with a blue
 
 Setting up the Raspberry Pi
 ===========================
-*Note: The first 3 steps listed below are standard for setting up a headless Raspberry Pi and are not specific to this project.  A more detailed explanation is available at https://www.raspberrypi.org/documentation/configuration/wireless/headless.md*
+*Notes: 
+- The first 3 steps listed below are standard for setting up a headless Raspberry Pi and are not specific to this project.  A more detailed explanation is available at https://www.raspberrypi.org/documentation/configuration/wireless/headless.md*
+- These instructions and the scripts all assume you are setting this up to run as the pi user and you are starting in the pi home directory (/home/pi). The application itself will be installed in the /home/pi/InternetRadio directory in a python virtual environment.
 
 1. Burn Raspbian image to sd card. These instructions are for Raspbian lite. If you install another version you may already have some of these packages.
 2. Create ssh file and place it in the boot folder on the sd card.
@@ -13,9 +15,7 @@ Setting up the Raspberry Pi
 5. `$sudo raspi-config` to change password, set time zone, keyboard layout etc.
 6. `$sudo apt-get update && sudo apt-get upgrade -y`
 7. `$sudo apt-get install git screen pianobar bluez-tools bluealsa python3-pip python3-venv libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 -y`
-8. `$git clone https://github.com/bg1000/InternetRadio.git`
-9. `$cd InternetRadio`
-10. `$pip3 install -r requirements.txt`
+8. `$ bash <(curl -s http://mywebsite.com/myscript.txt)'
 11. `$sudo adduser pi bluetooth`
 12. `$sudo reboot`
 
