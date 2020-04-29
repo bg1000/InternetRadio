@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=20
 User=%i
-ExecStart=/usr/bin/python3 -u /home/pi/internet_radio/radio_manager.py
+ExecStart=/home/pi/InternetRadio/env/bin/python3 -u /home/pi/InternetRadio/radio_manager.py
 
 [Install]
 WantedBy=multi-user.target
