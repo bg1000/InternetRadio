@@ -12,7 +12,7 @@ class findProcByName:
     pidList = []
     def __init__(self, processName):
         for proc in psutil.process_iter():
-            print (proc.name)
+#            print (proc.name)
             try:
 	            #Check if process name contains the passed in string
                 # - make the search case insensitive
