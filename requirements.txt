@@ -1,4 +1,4 @@
-PyYAML==5.2
+PyYAML==5.4
 psutil==5.7.0
 pydbus==0.6.0
 pycairo==1.19.1
